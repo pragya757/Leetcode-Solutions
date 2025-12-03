@@ -1,19 +1,28 @@
 class Solution {
- public:
-  int maxArea(vector<int>& height) {
-    int ans = 0;
-    int l = 0;
-    int r = height.size() - 1;
+public:
+    int maxArea(vector<int>& height) {
+        int maxWater = 0;
+        int left = 0;
+        int right = height.size() - 1;
 
-    while (l < r) {
-      const int minHeight = min(height[l], height[r]);
-      ans = max(ans, minHeight * (r - l));
-      if (height[l] < height[r])
-        ++l;
-      else
-        --r;
+        while (left < right) {
+            // Calculate the current area
+            int currentHeight = min(height[left], height[right]);
+            int currentWidth = right - left;
+            int currentArea = currentHeight * currentWidth;
+            
+            // Update the maximum area found so far
+            maxWater = max(maxWater, currentArea);
+            
+            // Move the pointer pointing to the shorter line inward
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        
+        return maxWater;
     }
-
-    return ans;
-  }
 };
+
