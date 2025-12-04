@@ -1,42 +1,31 @@
-from typing import List
-
 class Solution:
-    def setZeroes(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
-        n = len(matrix)
-        m = len(matrix[0])
-        zero_rows = set()
-        zero_cols = set()
+  def setZeroes(self, matrix: list[list[int]]) -> None:
+    m = len(matrix)
+    n = len(matrix[0])
+    shouldFillFirstRow = 0 in matrix[0]
+    shouldFillFirstCol = 0 in list(zip(*matrix))[0]
 
-        # Step 1: Identify all rows and columns that need to be zeroed
-        for i in range(n):
-            for j in range(m):
-                if matrix[i][j] == 0:
-                    zero_rows.add(i)
-                    zero_cols.add(j)
+    # Store the information in the first row and the first column.
+    for i in range(1, m):
+      for j in range(1, n):
+        if matrix[i][j] == 0:
+          matrix[i][0] = 0
+          matrix[0][j] = 0
 
-        # Step 2: Set the corresponding rows and columns to zero
-        for i in range(n):
-            for j in range(m):
-                if i in zero_rows or j in zero_cols:
-                    matrix[i][j] = 0
+    # Fill 0s for the matrix except the first row and the first column.
+    for i in range(1, m):
+      for j in range(1, n):
+        if matrix[i][0] == 0 or matrix[0][j] == 0:
+          matrix[i][j] = 0
 
-# Test code (useful for running locally)
-if __name__ == "__main__":
-    matrix = [
-        [1, 1, 1],
-        [1, 0, 1],
-        [1, 1, 1]
-    ]
-    print("Original Matrix:")
-    for row in matrix:
-        print(row)
+    # Fill 0s for the first row if needed.
+    if shouldFillFirstRow:
+      matrix[0] = [0] * n
 
-    Solution().setZeroes(matrix)
+    # Fill 0s for the first column if needed.
+    if shouldFillFirstCol:
+      for row in matrix:
+        row[0] = 0
 
-    print("\nFinal Matrix:")
-    for row in matrix:
-        print(row)
+
 
