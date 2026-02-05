@@ -14,13 +14,9 @@ public:
                     zeroCount--;
                 left++;
             }
-
-            // Length of current window minus 1 (since we need to delete one element)
             maxLength = max(maxLength, right - left);
-
             right++;
         }
-
         return maxLength;
     }
 };
