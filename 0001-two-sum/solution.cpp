@@ -1,8 +1,9 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
+        int n= nums.size();
         unordered_map<int,int>temp;
-        for (int i=0; i<nums.size(); i++){
+        for (int i=0; i<n; i++){
             int curr=nums[i];
             int exp=target-curr;
 
