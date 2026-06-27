@@ -9,13 +9,15 @@ public:
             if(nums[mid]==target){
                 return mid;
             }
-            if(nums[st]<=nums[mid]){//left array
+            if(nums[st]<=nums[mid]){
                 if(nums[st]<=target && target<=nums[mid]){
                     end=mid-1;
-                }else{
+                }
+                else{
                     st=mid+1;
                 }
-            }else{//right array
+            }
+            else{
                 if(nums[mid]<=target && target<=nums[end]){
                     st=mid+1;
                 }else{
