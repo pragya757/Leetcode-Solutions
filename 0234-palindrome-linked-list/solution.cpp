@@ -11,13 +11,14 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
+        //middle of linkedlist
         ListNode* slow=head;
         ListNode* fast=head;
-        while(fast!=NULL && fast->next!=NULL){
+        while(fast && fast->next){
             slow=slow->next;
             fast=fast->next->next;
         }
-
+        //reverse the second half
         ListNode* prev=NULL;
         while(slow){
             ListNode* next=slow->next;
@@ -25,8 +26,9 @@ public:
             prev=slow;
             slow=next;
         }
+        //check matching
         while(prev){
-            if(head->val != prev->val){
+            if(head->val!=prev->val){
                 return false;
             }
             head=head->next;
