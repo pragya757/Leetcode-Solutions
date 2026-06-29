@@ -1,13 +1,22 @@
 class Solution {
- public:
-  int reverse(int x) {
-    long ans = 0;
+public:
+    int reverse(int x) {
 
-    while (x != 0) {
-      ans = ans * 10 + x % 10;
-      x /= 10;
+        long r = 0;     // use long for overflow check
+
+        while(x){
+
+            int digit = x % 10;     // take last digit
+
+            r = r * 10 + digit;     // build reverse
+
+            x = x / 10;             // remove last digit
+        }
+
+        if(r > INT_MAX || r < INT_MIN){
+            return 0;
+        }
+
+        return (int)r;
     }
-
-    return (ans < INT_MIN || ans > INT_MAX) ? 0 : ans;
-  }
 };
