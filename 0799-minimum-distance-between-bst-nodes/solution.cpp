@@ -11,28 +11,22 @@
  */
 class Solution {
 public:
-    int ans = INT_MAX;
-    TreeNode* prev = NULL;
-
-    void inorder(TreeNode* root){
-
-        if(root == NULL)
-            return;
-
-        inorder(root->left);
-
-        if(prev != NULL)
-            ans = min(ans, root->val - prev->val);
-
-        prev = root;
-
-        inorder(root->right);
-    }
-
+    TreeNode* prev=NULL;
     int minDiffInBST(TreeNode* root) {
-
-        inorder(root);
-
+        if(root==NULL) return INT_MAX;
+        int ans=INT_MAX;
+        if(root->left != NULL){
+            int leftmin=minDiffInBST(root->left);
+            ans=min(ans,leftmin);
+        }
+        if(prev != NULL){
+            ans=min(ans, root->val - prev->val);
+        }
+        prev=root;
+        if(root->right != NULL){
+            int rightmin=minDiffInBST(root->right);
+            ans=min(ans,rightmin);
+        }
         return ans;
     }
 };
