@@ -13,9 +13,9 @@ public:
 
     ListNode* mergeTwo(ListNode* l1,ListNode* l2){
 
-        ListNode dummy(0);
+        ListNode* dummy=new ListNode(-1);
 
-        ListNode* tail=&dummy;
+        ListNode* tail=dummy;
 
         while(l1 && l2){
 
@@ -41,7 +41,7 @@ public:
             tail->next=l2;
         }
 
-        return dummy.next;
+        return dummy->next;
     }
 
     ListNode* mergeKLists(vector<ListNode*>& lists) {
