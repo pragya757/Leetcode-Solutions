@@ -1,22 +1,37 @@
 class Solution {
 public:
     bool isValid(string s) {
+        
         stack<char> st;
-        int n=s.size();
-        for(int i=0;i<n;i++){
-            if(s[i]=='(' || s[i]=='[' || s[i]=='{'){
+
+        for(int i=0; i<s.size(); i++){
+
+            // opening bracket
+            if(s[i]=='(' || s[i]=='{' || s[i]=='['){
                 st.push(s[i]);
             }
+
+            // closing bracket
             else{
+
+                // no opening bracket available
                 if(st.empty()){
                     return false;
                 }
-                if(s[i]==')' && st.top()!='(' || s[i]==']' && st.top()!='[' || s[i]=='}' && st.top()!='{'){
+
+                // check matching
+                if( (s[i]==')' && st.top()!='(') ||
+                    (s[i]=='}' && st.top()!='{') ||
+                    (s[i]==']' && st.top()!='[') ){
+                    
                     return false;
                 }
+
+                // matched → remove
                 st.pop();
             }
         }
+
         return st.empty();
     }
 };
